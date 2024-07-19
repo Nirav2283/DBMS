@@ -4,7 +4,7 @@ CREATE DATABASE CSE_3A_175
 
 CREATE TABLE DEPOSIT(
 
-    ACTNO INT,
+                ACTNO INT,
 
                 CNAME VARCHAR(50),
 

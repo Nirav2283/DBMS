@@ -92,7 +92,7 @@ SELECT * FROM STUDENT WHERE WEBSITE LIKE '%NET%'
 SELECT * FROM STUDENT WHERE ADDRESS LIKE '%-%'
 
 --2. Display all the students whose address contains single quote or double quote.
-SELECT * FROM STUDENT WHERE ADDRESS LIKE '%[" , '']%'
+SELECT * FROM STUDENT WHERE ADDRESS LIKE 
 
 --3. Display all the students whose website contains @.
 SELECT * FROM STUDENT WHERE WEBSITE LIKE '%@%'
