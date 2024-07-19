@@ -76,4 +76,8 @@ SELECT COUNT(ENAME) AS COUNT_EMP FROM EMP WHERE JOININGDATE < 1991-1-1 AND DEPAR
 --3. Find the Joining Date wise Total Salaries.
 SELECT JOININGDATE , SUM(SALARY) AS SUM_SALARY FROM EMP GROUP BY JOININGDATE
 
-4. Find the Maximum salary department & city wise in which city name starts with ‘R’.
+--4. Find the Maximum salary department & city wise in which city name starts with ‘R’.
+SELECT city, department, MAX(salary) as max_salary
+FROM emp
+WHERE city LIKE 'R%'
+GROUP BY city, department
