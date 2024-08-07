@@ -81,3 +81,117 @@ SELECT city, department, MAX(salary) as max_salary
 FROM emp
 WHERE city LIKE 'R%'
 GROUP BY city, department
+
+
+--EXTRA QUESTIONS
+
+--1.Calculate the average salary of employees hired after 1st January, 1991. Label the column as Average_Salary_After_1991.
+SELECT
+AVG(SALARY)
+AS AVERAGE_SALARY 
+FROM EMP
+WHERE JOININGDATE > '1991-1-1'
+
+       
+--2.Find the total number of employees in each department.
+SELECT DEPARTMENT,
+COUNT(EName)
+AS NUMBER
+FROM EMP
+GROUP BY DEPARTMENT
+
+--3.Display the total salary of employees in each city in descending order.
+SELECT CITY,
+SUM(SALARY)
+AS TOTAL
+FROM EMP
+GROUP BY CITY
+ORDER BY TOTAL DESC
+
+--4.Find the total number of employees in each city.
+SELECT CITY,
+COUNT(EName)
+AS LOL
+FROM EMP
+GROUP BY CITY
+--5.Find the highest salary among all employees.
+SELECT
+MAX(SALARY)
+AS LOL
+FROM EMP
+
+--6.Retrieve the maximum salary from the IT department.
+SELECT DEPARTMENT,
+MAX(SALARY)
+AS LOP
+FROM EMP
+GROUP BY DEPARTMENT
+HAVING DEPARTMENT = 'IT'
+
+--7.Count the total number of distinct cities where employees reside.
+SELECT
+COUNT(DISTINCT CITY)
+AS LOP
+FROM EMP
+
+--8.Calculate the total salary of each department.
+SELECT DEPARTMENT,
+SUM(SALARY)
+AS LOP
+FROM EMP
+GROUP BY DEPARTMENT
+
+--9.Find the minimum salary of an employee residing in Ahmedabad.
+SELECT CITY,
+MIN(SALARY)
+AS LOP
+FROM EMP
+GROUP BY CITY
+HAVING CITY = 'AHEMDABAD'
+   
+--10.List the departments with total salaries exceeding 50000 and located in Rajkot.
+SELECT DEPARTMENT,
+SUM(SALARY)
+AS LOP
+FROM EMP
+WHERE CITY = 'RAJKOT'
+GROUP BY DEPARTMENT
+HAVING SUM(SALARY) > 50000
+
+--11.List the departments with total salaries exceeding 35000 and sort the list by total salary.
+SELECT DEPARTMENT,
+SUM(SALARY)
+AS LOP
+FROM EMP
+GROUP BY DEPARTMENT
+HAVING SUM(SALARY)>35000
+ORDER BY LOP
+    
+--12.List departments with more than two employees.
+SELECT DEPARTMENT,
+COUNT(EName)
+AS LOP
+FROM EMP
+GROUP BY DEPARTMENT
+HAVING COUNT(EName) > 2
+
+--13.Show departments where the average salary is above 25000.
+SELECT DEPARTMENT,
+AVG(SALARY)
+AS LOP
+FROM EMP
+GROUP BY DEPARTMENT
+HAVING AVG(SALARY) > 25000
+    
+--14.Retrieve cities with employees hired before 1st January 1991.
+SELECT CITY
+FROM EMP
+WHERE JOININGDATE < '1991-1-1'
+
+--15.Find departments with a total salary between 50000 and 100000
+SELECT DEPARTMENT,
+SUM(SALARY)
+AS LOP
+FROM EMP
+GROUP BY DEPARTMENT
+HAVING SUM(SALARY) BETWEEN 50000 AND 100000
