@@ -1,0 +1,121 @@
+SELECT * FROM DEPT
+SELECT * FROM PERSON
+
+INSERT INTO PERSON VALUES(110 , 'Mohit Maru' , 5 , 14000 , '2000-5-25' , 'Jamnagar')
+
+--Part – A:
+--1. Find all persons with their department name & code.
+SELECT 
+PERSONNAME, DEPARTMENTNAME , DEPARTMENTCODE
+FROM DEPT JOIN PERSON 
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+
+--2. Find the person's name whose department is in C-Block.
+SELECT 
+PERSONNAME , DEPT.LOCATION
+FROM DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+WHERE DEPT.LOCATION = 'C-BLOCK'
+
+--3. Retrieve person name, salary & department name who belongs to Jamnagar city.
+SELECT 
+PERSONNAME , SALARY , DEPARTMENTNAME
+FROM DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+WHERE PERSON.CITY = 'JAMNAGAR'
+
+--4. Retrieve person name, salary & department name who does not belong to Rajkot city.
+SELECT 
+PERSONNAME , SALARY , DEPARTMENTNAME
+FROM DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+WHERE NOT PERSON.CITY = 'RAJKOT'
+
+--5. Retrieve person’s name of the person who joined the Civil department after 1-Aug-2001.
+SELECT
+PERSONNAME , JOININGDATE
+FROM DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+WHERE PERSON.JOININGDATE > '2001-8-1' AND DEPT.DEPARTMENTNAME = 'CIVIL'
+
+--6. Find details of all persons who belong to the computer department 
+SELECT * FROM
+DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+WHERE DEPT.DEPARTMENTNAME = 'COMPUTER'
+
+--7. Display all the person's name with the department whose joining date difference with the current date 
+--is more than 365 days.
+SELECT 
+PERSONNAME , JOININGDATE
+FROM DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+WHERE DATEDIFF(DAY , GETDATE() , JOININGDATE) > 365
+
+--8. Find department wise person counts.
+SELECT 
+COUNT(PERSONNAME) , DEPARTMENTNAME 
+FROM DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+GROUP BY DEPT.DEPARTMENTNAME
+
+--9. Give department wise maximum & minimum salary with department name.
+SELECT
+DEPARTMENTNAME , MAX(SALARY) AS MAXSAL , MIN(SALARY) AS MINSAL
+FROM DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+GROUP BY DEPT.DEPARTMENTNAME
+
+--10. Find city wise total, average, maximum and minimum salary.
+SELECT
+CITY , SUM(SALARY) AS TOTAL , AVG(SALARY) AS AVERAGE , MIN(SALARY) AS MINSAL FROM
+DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+GROUP BY PERSON.CITY
+
+--11. Find the average salary of a person who belongs to Ahmedabad city.
+SELECT
+AVG(SALARY) AS AVGSAL, CITY FROM
+DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+GROUP BY CITY HAVING CITY = 'AHEMDABAD'
+
+--12. Produce Output Like: <PersonName> lives in <City> and works in <DepartmentName> Department. (In 
+--single column)
+SELECT 
+CONCAT(PERSONNAME , 'lives in ' , CITY , ' and works in ' , DEPARTMENTNAME , ' department')
+FROM DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+
+
+--PART B
+
+
+--1. Produce Output Like: <PersonName> earns <Salary> from <DepartmentName> department monthly. (In 
+--single column)
+SELECT 
+CONCAT(PERSONNAME , 'earns ' ,SALARY , ' from ' , DEPARTMENTNAME , ' department monthly')
+FROM DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+
+--2. Find city & department wise total, average & maximum salaries.
+SELECT
+CITY , DEPARTMENTNAME , SUM(SALARY), AVG(SALARY) , MAX(SALARY) 
+FROM
+DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+GROUP BY CITY , DEPARTMENTNAME
+
+--3. Find all persons who do not belong to any department.
+SELECT * FROM
+DEPT FULL JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+WHERE PERSON.DEPARTMENTID IS NULL
+
+--4. Find all departments whose total salary is exceeding 100000
+SELECT
+DEPARTMENTNAME , SALARY
+FROM
+DEPT JOIN PERSON
+ON DEPT.DEPARTMENTID = PERSON.DEPARTMENTID
+WHERE SALARY > 10000
